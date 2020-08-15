@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE> Priority Pulse </TITLE>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  body {font-family: Arial;}
+
+  #patient-details {
+    background-color: #FDFDFD;
+	position: absolute;
+	right: 100px;
+	top: 100px;
+  }
+
+  input {
+    border: none;
+	border-bottom: 2px solid #F59494;
+	padding: 12px 12px;
+	width: 80%;
+	font-size: 16px;
+	background-color: #D3D9E0;
+  }
+
+  #patient-details button {
+    background-color: #F59494;
+	font-size: 20px;
+	border: none;
+	cursor: pointer;
+	width: 80%;
+	padding: 10px 0;
+  }
+
+  .nav {
+    position: absolute;
+	top: 30px;
+	right: 200px;
+  }
+
+  .nav button {
+    border: none;
+    cursor: pointer;
+    color: #FDFDFD;
+    background-color: #2F303A;
+	font-size: 20px;
+	margin: 0 20px;
+  }
+
+  .nav button:hover {
+    background-color: #FDFDFD;
+	border: none;
+	color: #2F303A;
+	font-size: 20px;
+  }
+
+  .nav button:active {
+    background-color: #FDFDFD;
+	border: none;
+	color: #2F303A;
+	font-size: 20px;
+  }
+
+  th {
+	background-color: #F59494;
+  }
+
+  td {
+    text-align: center;
+	background-color: #FDFDFD;
+  }
+</style>
+</HEAD>
+
+<BODY bgcolor="2F303A">
+  <h1 style="color:#fdfdfd; margin:20px 20px;">Priority Pulse</h1>
+  <div class="nav">
+    <button type="button"><b>Home</b></button>
+    <button type="button"><b>Active Rides</b></button>
+    <button type="button"><b>Profile</b></button>
+    <button type="button"><b>Logout</b></button>
+  </div>
+  <img src="Profile.png" style="height:70px; width:70px; position:absolute; top:20px; right:100px;">
+  <img src="Ambulance.png" style="height:500px; width:500px; position:absolute; top:100px; left:100px;">
+  <p style="color:#FDFDFD; position:absolute; top:500px; left:150px;">An issue that is never-ending in our country is the traffic.<br>The Core problem with traffic arises when an ambulance tries to cross over.<br>Our Team Priority Pulse is reaching out to this issue with a Priority-based solution.</p>
+  <div id="patient-details">
+    <form method="post">
+	  <center>
+	    <h1 style="margin:20px 100px;">Patient Details</h1>
+		Fill the Details Below
+		<p><input type="text" id="name" placeholder="Patient Name" required/></p>
+		<p><input type="number" id="age" placeholder="Patient Age"/></p>
+		<p><input type="text" id="case" placeholder="Case" required/></p>
+		<p><input type="number" id="Priority" placeholder="Priority Level" required/></p>
+		<p><input type="tel" id="contact" pattern="[0-9]{10}" placeholder="Contact" required/></p>
+		<p>
+		  <button type="button" id="btnsubmit" onclick="Display()"><b>Submit</b></button><br>
+		  <div style="line-height:20px;">Getting problem in submitting</div>
+		</p>
+		<p><br><button type="button" id="track"><b>Track Patient</b></button></p>
+	  </center>
+	</form>
+  </div>
+  <div id="result" style="position:absolute; top:700px; left:150px;">
+    <table>
+	  <tr>
+	    <th style="padding:8px 30px;">S.No.</th>
+		<th style="padding:8px 50px;">Patient Name</th>
+		<th style="padding:8px 40px;">Patient Age</th>
+		<th style="padding:8px 40px;">Case</th>
+		<th style="padding:8px 45px;">Contact</th>
+		<th style="padding:8px 40px;">Priority Level</th>
+	  </tr>
+	  <tr id="table"></tr>
+    </table>
+  </div>
+
+  <script>
+  var ct = 0;
+  function Display() {
+    var f = 1;
+    var Nam = document.getElementById("name").value;
+    var cas = document.getElementById("case").value;
+	if(Nam == null || Nam == "") {
+	  alert("Name cannot be empty.");
+	  f = 0;
+	}
+	else if(!/^[a-zA-Z]*\s?[a-zA-Z]*\s?[a-zA-Z]*\s?[a-zA-Z]*\s?[a-zA-Z]*\s?[a-zA-Z]*\s?[a-zA-Z]*\s?[a-zA-Z]*$/.test(Nam)) {
+	  alert("Name can contain only letters and white spaces.");
+	  f = 0;
+	}
+	if(!/^[a-zA-Z]*\s?[a-zA-Z]*\s?[a-zA-Z]*\s?[a-zA-Z]*\s?[a-zA-Z]*\s?[a-zA-Z]*\s?[a-zA-Z]*\s?[a-zA-Z]*$/.test(cas)) {
+	  alert("Case can contain only letters and white spaces.");
+	  f = 0;
+	}
+	if(f == 1) {
+	  ct++;
+      var HTMLCode = "<tr>";
+	  HTMLCode += "<td>" + ct + "</td>";
+	  HTMLCode += "<td>" + document.getElementById("name").value + "</td>";
+	  HTMLCode += "<td>" + document.getElementById("age").value + "</td>";
+	  HTMLCode += "<td>" + document.getElementById("case").value + "</td>";
+   	  HTMLCode += "<td>" + document.getElementById("contact").value + "</td>";
+	  HTMLCode += "<td>" + document.getElementById("Priority").value + "</td>";
+	  HTMLCode += "</tr>";
+	  HTMLCode += "<tr id='table'></tr>"
+	  var ele = document.getElementById("table");
+	  var newele = ele.parentNode;
+	  newele.removeChild(ele);
+	  newele.innerHTML += HTMLCode;
+	}
+  }
+  </script>
+</BODY>
+</HTML>
